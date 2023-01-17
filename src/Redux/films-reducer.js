@@ -83,13 +83,17 @@ export const selectFilteredFilms = (state) => {
 
     if (searchRate.length > 0 ) {
       if(searchRate.includes('all')){
-         return true
-      }
-      let value = Math.floor(film.rating).toString();
+        isInclude = true
+      }else{
+        let value = Math.floor(film.rating).toString();
        isInclude = searchRate.includes(value);
+    
       if (!isInclude) {
         return false
       }
+
+      }
+      
     }
 
     if (searchTitle) {
@@ -101,12 +105,14 @@ export const selectFilteredFilms = (state) => {
      (searchCategory.length)
     if (searchCategory.length > 0) {
       if(searchCategory.includes('all')){
-        return true
-     }
+      isInclude = true
+     }else{
       isInclude = searchCategory.includes(film.category);
       if (!isInclude) {
         return false
       }
+     }
+   
     }
     return isInclude
   })
